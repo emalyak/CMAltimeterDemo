@@ -1,19 +1,120 @@
-//
-//  ViewController.swift
-//  CMAltimeterDemo
-//
-//  Created by Erik Malyak on 9/21/14.
-//  Copyright (c) 2014 Erik Malyak. All rights reserved.
-//
+/*
+
+  ViewController.swift
+  CMAltimeterDemo
+
+  The MIT License (MIT)
+
+  Copyright (c) 2014 Erik Malyak
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+*/
 
 import UIKit
+import CoreMotion // Make sure CoreMotion is imported
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var altLabel: UILabel! // Relative altitude label
+    @IBOutlet weak var pressureLabel: UILabel! // Pressure label
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! // Activity indicator
+    @IBOutlet weak var altimeterSwitch: UISwitch! // Altimeter start / stop switch
+    
+    let altimeter = CMAltimeter() // Initialize CMAltimeter
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.activityIndicator.stopAnimating() // Hide activity indicator unless altimeter is on
+        
     }
+    
+    func startAltimeter() {
+        
+        println("Started relative altitude updates.")
+        
+        // Check if altimeter feature is available
+        if (CMAltimeter.isRelativeAltitudeAvailable()) {
+            
+            self.activityIndicator.startAnimating()
+            
+            // Start altimeter updates, add it to the main queue
+            self.altimeter.startRelativeAltitudeUpdatesToQueue(NSOperationQueue.mainQueue()) { (altitudeData:CMAltitudeData!, error:NSError!) in
+                
+                if (error != nil) {
+                    
+                    // If there's an error, stop updating and alert the user
+                    
+                    self.altimeterSwitch.on = false
+                    self.stopAltimeter()
+                    
+                    let alertView = UIAlertView(title: "Error", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+                    alertView.show()
+                    
+                } else {
+                    
+                    let altitudeFeet = altitudeData.relativeAltitude * 3937.0 / 1200.0 // Convert to feet
+                    let pressureMillibars = altitudeData.pressure * 10.0 // Convert pressue to millibars
+                    
+                    // Update labels, truncate float to two decimal points
+                    self.altLabel.text = NSString(format: "%.02f", altitudeFeet)
+                    self.pressureLabel.text = NSString(format: "%.02f", pressureMillibars)
+                    
+                }
+                
+            }
+            
+        } else {
+            
+            let alertView = UIAlertView(title: "Error", message: "Barometer not available on this device.", delegate: nil, cancelButtonTitle: "OK")
+            alertView.show()
+            
+        }
+        
+    }
+    
+    func stopAltimeter() {
+        
+        // Reset labels
+        self.altLabel.text = "-"
+        self.pressureLabel.text = "-"
+        
+        self.altimeter.stopRelativeAltitudeUpdates() // Stop updates
+        
+        self.activityIndicator.stopAnimating() // Hide indicator
+        
+        println("Stopped relative altitude updates.")
+        
+    }
+    
+    @IBAction func switchDidChange(senderSwitch: UISwitch) {
+        
+        if (senderSwitch.on == true) {
+            self.startAltimeter()
+        } else {
+            self.stopAltimeter()
+        }
+        
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
