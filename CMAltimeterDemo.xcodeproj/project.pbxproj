@@ -13,6 +13,9 @@
 		80BAAA3419CF3CE900710484 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80BAAA3319CF3CE900710484 /* Images.xcassets */; };
 		80BAAA3719CF3CE900710484 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80BAAA3519CF3CE900710484 /* LaunchScreen.xib */; };
 		80BAAA4319CF3CE900710484 /* CMAltimeterDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BAAA4219CF3CE900710484 /* CMAltimeterDemoTests.swift */; };
+		80BAAA4E19CF9F9800710484 /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 80BAAA4C19CF9F9800710484 /* screenshot.png */; };
+		80BAAA4F19CF9F9800710484 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 80BAAA4D19CF9F9800710484 /* README.md */; };
+		80BAAA5119CF9FC700710484 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 80BAAA5019CF9FC700710484 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		80BAAA3C19CF3CE900710484 /* CMAltimeterDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CMAltimeterDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		80BAAA4119CF3CE900710484 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80BAAA4219CF3CE900710484 /* CMAltimeterDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMAltimeterDemoTests.swift; sourceTree = "<group>"; };
+		80BAAA4C19CF9F9800710484 /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
+		80BAAA4D19CF9F9800710484 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		80BAAA5019CF9FC700710484 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,9 @@
 				80BAAA2919CF3CE900710484 /* CMAltimeterDemo */,
 				80BAAA3F19CF3CE900710484 /* CMAltimeterDemoTests */,
 				80BAAA2819CF3CE900710484 /* Products */,
+				80BAAA4D19CF9F9800710484 /* README.md */,
+				80BAAA5019CF9FC700710484 /* LICENSE */,
+				80BAAA4C19CF9F9800710484 /* screenshot.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,6 +205,8 @@
 				80BAAA3219CF3CE900710484 /* Main.storyboard in Resources */,
 				80BAAA3719CF3CE900710484 /* LaunchScreen.xib in Resources */,
 				80BAAA3419CF3CE900710484 /* Images.xcassets in Resources */,
+				80BAAA4E19CF9F9800710484 /* screenshot.png in Resources */,
+				80BAAA5119CF9FC700710484 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80BAAA4F19CF9F9800710484 /* README.md in Sources */,
 				80BAAA2F19CF3CE900710484 /* ViewController.swift in Sources */,
 				80BAAA2D19CF3CE900710484 /* AppDelegate.swift in Sources */,
 			);
