@@ -7,7 +7,7 @@ A simple demonstration of the CMAltimeter class and barometer sensor on iPhone 6
 
 Instructions
 ------------
-Tap the switch to turn on relative altitute and pressure updates. Tap the switch again to turn off updates.
+Tap the switch to turn on relative altitude and pressure updates. Tap the switch again to turn off updates.
 
 Requirements
 ------------
