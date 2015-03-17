@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! // Activity indicator
     @IBOutlet weak var altimeterSwitch: UISwitch! // Altimeter start / stop switch
     
-    let altimeter = CMAltimeter() // Initialize CMAltimeter
+    lazy var altimeter = CMAltimeter() // Lazily load CMAltimeter
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
             self.activityIndicator.startAnimating()
             
             // Start altimeter updates, add it to the main queue
-            self.altimeter.startRelativeAltitudeUpdatesToQueue(NSOperationQueue.mainQueue()) { (altitudeData:CMAltitudeData!, error:NSError!) in
+            self.altimeter.startRelativeAltitudeUpdatesToQueue(NSOperationQueue.mainQueue(), { (altitudeData:CMAltitudeData?, error:NSError?) in
                 
                 if (error != nil) {
                     
@@ -66,21 +66,21 @@ class ViewController: UIViewController {
                     self.altimeterSwitch.on = false
                     self.stopAltimeter()
                     
-                    let alertView = UIAlertView(title: "Error", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+                    let alertView = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
                     alertView.show()
                     
                 } else {
                     
-                    let altitudeFeet = altitudeData.relativeAltitude * 3937.0 / 1200.0 // Convert to feet
-                    let pressureMillibars = altitudeData.pressure * 10.0 // Convert pressue to millibars
+                    let altitude = altitudeData!.relativeAltitude.floatValue    // Relative altitude in meters
+                    let pressure = altitudeData!.pressure.floatValue            // Pressure in kilopascals
                     
                     // Update labels, truncate float to two decimal points
-                    self.altLabel.text = NSString(format: "%.02f", altitudeFeet)
-                    self.pressureLabel.text = NSString(format: "%.02f", pressureMillibars)
+                    self.altLabel.text = NSString(format: "%.02f", altitude)
+                    self.pressureLabel.text = NSString(format: "%.02f", pressure)
                     
                 }
                 
-            }
+            })
             
         } else {
             
