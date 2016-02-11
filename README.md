@@ -11,4 +11,4 @@ Tap the switch to turn on relative altitude and pressure updates. Tap the switch
 
 Requirements
 ------------
-Requires iOS 8 and an iPhone 6 or 6 Plus
+Requires iOS 8+ and an iPhone 6/Plus or newer
