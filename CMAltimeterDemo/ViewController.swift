@@ -49,7 +49,7 @@ class ViewController: UIViewController {
     
     func startAltimeter() {
         
-        println("Started relative altitude updates.")
+        print("Started relative altitude updates.")
         
         // Check if altimeter feature is available
         if (CMAltimeter.isRelativeAltitudeAvailable()) {
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
             self.activityIndicator.startAnimating()
             
             // Start altimeter updates, add it to the main queue
-            self.altimeter.startRelativeAltitudeUpdatesToQueue(NSOperationQueue.mainQueue(), { (altitudeData:CMAltitudeData?, error:NSError?) in
+            self.altimeter.startRelativeAltitudeUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: { (altitudeData:CMAltitudeData?, error:NSError?) in
                 
                 if (error != nil) {
                     
@@ -75,8 +75,8 @@ class ViewController: UIViewController {
                     let pressure = altitudeData!.pressure.floatValue            // Pressure in kilopascals
                     
                     // Update labels, truncate float to two decimal points
-                    self.altLabel.text = NSString(format: "%.02f", altitude)
-                    self.pressureLabel.text = NSString(format: "%.02f", pressure)
+                    self.altLabel.text = String(format: "%.02f", altitude)
+                    self.pressureLabel.text = String(format: "%.02f", pressure)
                     
                 }
                 
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         
         self.activityIndicator.stopAnimating() // Hide indicator
         
-        println("Stopped relative altitude updates.")
+        print("Stopped relative altitude updates.")
         
     }
     
