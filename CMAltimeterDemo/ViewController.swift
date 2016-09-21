@@ -57,13 +57,13 @@ class ViewController: UIViewController {
             self.activityIndicator.startAnimating()
             
             // Start altimeter updates, add it to the main queue
-            self.altimeter.startRelativeAltitudeUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: { (altitudeData:CMAltitudeData?, error:NSError?) in
+            self.altimeter.startRelativeAltitudeUpdates(to: OperationQueue.main, withHandler: { (altitudeData:CMAltitudeData?, error:Error?) in
                 
                 if (error != nil) {
                     
                     // If there's an error, stop updating and alert the user
                     
-                    self.altimeterSwitch.on = false
+                    self.altimeterSwitch.isOn = false
                     self.stopAltimeter()
                     
                     let alertView = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
@@ -105,9 +105,9 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func switchDidChange(senderSwitch: UISwitch) {
+    @IBAction func switchDidChange(_ senderSwitch: UISwitch) {
         
-        if (senderSwitch.on == true) {
+        if (senderSwitch.isOn == true) {
             self.startAltimeter()
         } else {
             self.stopAltimeter()

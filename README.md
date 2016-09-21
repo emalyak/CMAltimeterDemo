@@ -1,7 +1,7 @@
 CMAltimeterDemo
 ===============
 
-A simple demonstration of the CMAltimeter class and barometer sensor on iPhone 6 and 6 Plus.
+A simple demonstration of the CMAltimeter class and barometer sensor on iPhone 6 / 6 Plus and newer.
 
 <img src="https://github.com/emalyak/CMAltimeterDemo/blob/master/screenshot.png" width="400" alt="Screenshot">
 
@@ -11,4 +11,4 @@ Tap the switch to turn on relative altitude and pressure updates. Tap the switch
 
 Requirements
 ------------
-Requires iOS 8+ and an iPhone 6/Plus or newer
+Requires iOS 8+ and an iPhone 6 / 6 Plus or newer
